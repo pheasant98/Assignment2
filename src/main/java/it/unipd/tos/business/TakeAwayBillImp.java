@@ -52,7 +52,12 @@ public class TakeAwayBillImp implements TakeAwayBill
         {
             ScontoTotale+=PrezzoTotale*0.10;
         }
-    
+        
+        if((PrezzoTotale>0.0) && (PrezzoTotale<10.0)) 
+        {
+            ScontoTotale-=0.5;
+        }
+        
         return PrezzoTotale-ScontoTotale;
     }
 

@@ -32,12 +32,12 @@ public class TakeAwayBillImpTest {
         List<MenuItem> itemsOrdered=new ArrayList<MenuItem>();
         for(int i=0; i<3; i++) 
         {
-            itemsOrdered.add(new MenuItem(ItemType.Fritti, "Patatine fritte", 3.0));
+            itemsOrdered.add(new MenuItem(ItemType.Fritti, "Patatine fritte", 4.0));
         }
 
         try 
         {
-            assertEquals(9.0, TABI.getOrderPrice(itemsOrdered), 0);
+            assertEquals(12.0, TABI.getOrderPrice(itemsOrdered), 0);
         } 
         catch (TakeAwayBillException e) 
         {
@@ -117,5 +117,39 @@ public class TakeAwayBillImpTest {
         }
 
         TABI.getOrderPrice(itemsOrdered);
+    }
+    
+    @Test
+    public void testTaxForOrdersWithPriceLessThanTen() 
+    {
+        List<MenuItem> itemsOrdered = new ArrayList<MenuItem>();
+        for(int i=0; i<3; i++) 
+        {
+            itemsOrdered.add(new MenuItem(ItemType.Fritti, "PatatineFritte", 2));
+        }
+
+        try 
+        {
+            assertEquals(6.5, TABI.getOrderPrice(itemsOrdered), 0);
+        } 
+        catch (TakeAwayBillException e) 
+        {
+            fail("TakeAwayBillException thrown");
+        }
+    }
+
+    @Test
+    public void testPriceZero() 
+    {
+        List<MenuItem> itemsOrdered = new ArrayList<MenuItem>();
+
+        try 
+        {
+            assertEquals(0.0, TABI.getOrderPrice(itemsOrdered), 0);
+        } 
+        catch (TakeAwayBillException e) 
+        {
+            fail("TakeAwayBillException thrown");
+        }
     }
 }
