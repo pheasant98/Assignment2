@@ -38,5 +38,21 @@ public class TakeAwayBillImpTest {
             fail("TakeAwayBillException thrown");
         }
     }
+    
+    @Test
+    public void testDiscountIfMoreThanFiveSandwiches() 
+    {
+        List<MenuItem> itemsOrdered=new ArrayList<MenuItem>();
+        for(int i=0; i<5; i++) {
+            itemsOrdered.add(new MenuItem(ItemType.Panini, "Fantasia", 5.0));
+        }
+        itemsOrdered.add(new MenuItem(ItemType.Panini, "Vegetariano", 2.0));
+
+        try {
+            assertEquals(26.0, TABI.getOrderPrice(itemsOrdered), 0);
+        } catch (TakeAwayBillException e) {
+            fail("TakeAwayBillException thrown");
+        }
+    }
 
 }
