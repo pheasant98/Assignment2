@@ -22,7 +22,7 @@ public class TakeAwayBillImpTest {
 
     @Before
     public void before() {
-        TABI = new TakeAwayBillImp();
+        TABI=new TakeAwayBillImp();
     }
 
     @Test
