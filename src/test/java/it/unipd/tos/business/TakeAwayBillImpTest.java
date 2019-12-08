@@ -104,4 +104,18 @@ public class TakeAwayBillImpTest {
             fail("TakeAwayBillException thrown");
         }
     }
+    
+    @Test(expected = TakeAwayBillException.class) 
+    public void testErrorMoreThirtyElements() 
+            throws TakeAwayBillException 
+    {
+
+        List<MenuItem> itemsOrdered=new ArrayList<MenuItem>();
+        for(int i=0; i<31; i++) 
+        {
+            itemsOrdered.add(new MenuItem(ItemType.Bevande, "Fanta", 2));
+        }
+
+        TABI.getOrderPrice(itemsOrdered);
+    }
 }

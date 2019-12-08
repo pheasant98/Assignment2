@@ -20,7 +20,11 @@ public class TakeAwayBillImp implements TakeAwayBill
         double PrezzoTotalePaninieFritti=0.0;
         double ScontoTotale=0.0;
         int NumeroPanini=0;
-
+        
+        if(itemsOrdered.size()>30) 
+        {
+            throw new TakeAwayBillException("ERRORE, ordine>30 elementi");
+        }
         for(MenuItem itemOrdered : itemsOrdered) 
         {
             PrezzoTotale+=itemOrdered.getPrice();
