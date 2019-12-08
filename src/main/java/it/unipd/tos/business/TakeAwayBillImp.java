@@ -17,6 +17,8 @@ public class TakeAwayBillImp implements TakeAwayBill
     {
         double PrezzoTotale=0.0;
         double PrezzoMinPanino=Double.MAX_VALUE;
+        double PrezzoTotalePaninieFritti=0.0;
+        double ScontoTotale=0.0;
         int NumeroPanini=0;
 
         for(MenuItem itemOrdered : itemsOrdered) 
@@ -29,16 +31,25 @@ public class TakeAwayBillImp implements TakeAwayBill
                 {
                     PrezzoMinPanino=itemOrdered.getPrice();
                 }
+                PrezzoTotalePaninieFritti+=itemOrdered.getPrice();
                 NumeroPanini++;
+            }
+            if(itemOrdered.getItemType()==ItemType.Fritti) {
+                PrezzoTotalePaninieFritti+=itemOrdered.getPrice();
             }
         }
 
         if(NumeroPanini>5) 
         {
-            PrezzoTotale-=PrezzoMinPanino/2.0;
+            ScontoTotale+=PrezzoMinPanino/2.0;
+        }
+        
+        if(PrezzoTotalePaninieFritti>50.0) 
+        {
+            ScontoTotale+=PrezzoTotale*0.10;
         }
     
-        return PrezzoTotale;
+        return PrezzoTotale-ScontoTotale;
     }
 
 }
